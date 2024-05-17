@@ -1,4 +1,4 @@
-const DBString = "mongodb+srv://torahul1709:mLCpfK16jzTGrm7y@cluster0.hs9rren.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const DBString = process.env.MONGO_URL
 
 
 const mongoose = require('mongoose');
