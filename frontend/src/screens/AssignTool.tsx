@@ -171,7 +171,7 @@ function AssignTool() {
                                                             />
                                                         </FormControl>
                                                         <FormLabel className="font-normal">
-                                                            {item?.toolTitle}
+                                                            {item?.toolTitle} - 
                                                         </FormLabel>
                                                     </FormItem>
                                                 )

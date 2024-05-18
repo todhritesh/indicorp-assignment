@@ -1,6 +1,18 @@
 export const MechanicLevel = [
-    "Expert",
-    "Medium",
-    "New Recruit",
-    "Trainee"
+    {
+        value:"Expert",
+        displayName:"Expert"
+    },
+    {
+        value:"Trainee",
+        displayName:"Trainee"
+    },
+    {
+        value:"New Recruit",
+        displayName:"New Recruit"
+    },
+    {
+        value:"Medium",
+        displayName:"Medium"
+    }
 ]

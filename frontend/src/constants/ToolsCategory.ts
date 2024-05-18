@@ -1,6 +1,11 @@
 export const ToolsCategory = [
-    "Screw Driver",
-    "Wrench",
-    "Plier",
-    "Hammer"
+    
+    {
+        value:"Wrench",
+        displayName:"Wrench"
+    },
+    {
+        value:"Screw Driver",
+        displayName:"Screw Driver"
+    },
 ]

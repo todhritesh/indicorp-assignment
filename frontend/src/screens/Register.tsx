@@ -78,6 +78,7 @@ function Register() {
                 //   }
             })
             console.log(res,"hello")
+            toast.success("Registered Successfully")
 
         } catch (e:any) {
             console.log("something went wrong")
