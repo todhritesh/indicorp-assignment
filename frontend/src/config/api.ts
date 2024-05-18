@@ -22,7 +22,7 @@ privateClient.interceptors.request.use(config=>{
 
 const refreshAccessToken = async () => {
     try {
-      const response = await axios.post('/refresh-token', { refreshToken: localStorage.getItem('refreshToken') });
+      const response = await client.post('/auth/refresh-token', { refreshToken: localStorage.getItem('refreshToken') });
       localStorage.setItem('accessToken', response.data.accessToken);
       return response.data.accessToken;
     } catch (error) {

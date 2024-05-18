@@ -5,6 +5,8 @@ const multer = require("multer")
 
 // Sample route for login
 router.post('/login',AuthController.login);
+router.post('/check',AuthController.checkAuth);
+router.post('/refresh-token',AuthController.refreshToken);
 
 
 module.exports = router;

@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mechanicController = require('../controllers/mechanicController')
-const multer = require("multer")
+const upload = require('../services/multerService')
 const verifyJWTMiddleware = require("../middlewares/verifyJWTMiddleware")
 
 
-// Sample route for login
-router.post('/register', verifyJWTMiddleware, multer().single("image") ,mechanicController.register);
+router.post('/register' ,mechanicController.register);
+router.get('/all',mechanicController.all);
 
 
 module.exports = router;

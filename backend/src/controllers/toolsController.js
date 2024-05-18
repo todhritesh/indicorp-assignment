@@ -4,15 +4,15 @@ class ToolsController {
     static async addTool(req,res,next) {
 
         try {
-            if (!req.file) {
-              throw new Error('No file uploaded'); 
-            }
+            // if (!req.file) {
+            //   throw new Error('No file uploaded'); 
+            // } 
         
             const newTool = new Tool({
               toolTitle: req.body.toolTitle,
               toolCount: req.body.toolCount,
               toolCategory: req.body.toolCategory,
-              toolimage: req.file.path, 
+              toolimage: "", 
             });
         
             await newTool.save(); 
@@ -23,6 +23,17 @@ class ToolsController {
             res.status(500).json({ message: 'Error adding tool', error });
           }
         
+    }
+
+    static async all(req,res,next) {
+
+      try {
+        const tools = await Tool.find({}); 
+        res.status(200).json(tools); 
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching tools' });
+      }
     }
 
 

@@ -18,8 +18,11 @@ import { fileSchema } from "./ToolsInventory"
 import { MechanicLevel } from "@/constants/MechanicLevel"
 import CustomSelect from "@/app-components/CustomSelect"
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import client from "@/config/api"
+import privateClient from "@/config/api"
+import Spinner from "@/app-components/Spinner"
+import { toast } from "react-toastify"
 
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
@@ -41,6 +44,8 @@ const formSchema = z.object({
 
 function Register() {
 
+    const [loading,setLoading] = useState(false)
+
     useEffect(()=>{
         async function apiTest(){
             const res = await client.get("/api/test")
@@ -53,39 +58,40 @@ function Register() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email:"",
-            mobileNo:"",
-            name:"",
-            password:"",
-            mechanicLevel:"",
+            email:"email@gmail.com",
+            mobileNo:"3423232323",
+            name:"hello name",
+            password:"pass@123",
+            mechanicLevel:"Expert",
             image:""
         },
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true)
         try {
-            const fd = new FormData()
-            fd.append("email",values.email)
-            fd.append("mobileNo",values.mobileNo)
-            fd.append("name",values.name)
-            fd.append("password",values.password)
-            fd.append("mechanicLevel",values.mechanicLevel)
-            fd.append("image",values.image)
+           
 
-            const res = await client.post("/mechanic/register",fd,{
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            const res = await privateClient.post("/mechanic/register",values,{
+                // headers: {
+                //     'Content-Type': 'multipart/form-data'
+                //   }
             })
             console.log(res,"hello")
 
-        } catch (e) {
+        } catch (e:any) {
             console.log("something went wrong")
+            toast.error(e?.response?.data?.message||"Something went wrong")
+        } finally {
+            setLoading(false)
         }
     }
 
     return (
         <div className="container flex mx-auto justify-center my-12 px-2">
+            {
+                loading && <Spinner/>
+            }
             <div className="md:w-[400px]">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

@@ -3,14 +3,13 @@ const AssignedTool = require('../models/AssignedTool')
 module.exports = class AssingToolController {
     static async add(req,res,next) {
         try {
-            const { mechanicId, toolId } = req.body;
+            const { employee, tools } = req.body;
         
-            const newAssignment = new AssignedTool({
-              mechanic: mechanicId,
+            
+            const newAssignment = await AssignedTool.insertMany(tools.map(toolId=>({
+              mechanic: employee,
               tool: toolId,
-            });
-        
-            await newAssignment.save();
+            })));
         
             res.status(201).json(newAssignment); 
           } catch (error) {

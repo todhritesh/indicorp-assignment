@@ -16,7 +16,7 @@ const CustomSelect = ({title="",items=[],props}:{items:any[],props:any,title:str
             <SelectContent>
                 {
                     items?.map(s => (
-                        <SelectItem key={s} value={s}>{s}</SelectItem>
+                        <SelectItem key={s._id} value={s.value}>{s.displayName}</SelectItem>
                     ))
                 }
             </SelectContent>
